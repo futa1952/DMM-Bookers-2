@@ -1,0 +1,71 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+* {
+  margin:0;
+  padding:0;
+  outline:0;
+  font-size:100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333333;
+  background-color: #fff;
+}
+.container {
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-top: 70px;
+}
+h3 {
+  color: #fff;
+  font-size: 20px;
+  line-height: normal;
+}
+a:visited {
+  color: #666;
+}
+.btn {
+  margin: 5px 0;
+}
+.btn-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  margin:0;
+}
+.btn-info2 {
+  margin: 0;
+}
+.text-center {
+  margin-right: 60px;
+}
+.top {
+  margin-top: 70px;
+}
+.pull-right {
+  margin-right: 100px;
+}

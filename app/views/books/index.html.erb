@@ -1,0 +1,43 @@
+<body>
+  <div class="container">
+    <%= form_for @book do |f| %>
+    <div class="row">
+      <div class="col-xs-3">
+        <h1>New book</h1>
+        <div class="user-info">
+        </div>
+        <div class="new-book">
+          <div><%= f.label :title, "Title"%></div>
+          <%= f.text_field :title %>
+          <div><%= f.label :body, "Opinion"%></div>
+          <%= f.text_area :body %>
+          <% end %>
+          <div><button type="submit" class="btn btn-primary">Create Book</button></div>
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <h1>Books</h1>
+        <table>
+          <thead>
+            <tr>
+              <th> Title </th>
+              <th> Opinion </th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <td> <%= book.title %> </td>
+              <td> <%= book.body %></td>
+              <td> <%= link_to 'Show', book_path(book.id) %> </td>
+              <td> <%= link_to 'Edit', edit_book_path(book.id) %></td>
+              <td> <%= link_to 'Destroy', book_path(book.id), method: :delete, 'data-confirm' => 'Are you sure?' %> </td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
