@@ -9,23 +9,14 @@
             about various books!
           </p>
         </div>
-      </div>
+        <div class="center-block" style="width: 50%">
+          <%= link_to "login", new_user_session_path , class: "btn btn-info col-xs-10" %>
 
-      <div class="container">
-        <div class="row">
-          <div class="col text-center">
-            <%# 変更予定 %>
-            <a class="btn btn-primary btn-info" style="width:470px" href=" /users/sign_in">Log in</a>
-          </div>
         </div>
-        <div class="row">
-          <div class="col text-center">
-            <%# 変更予定 %>
-            <a class="btn btn-success btn-info2" style="width:470px" href="/users/sign_up">Sign up</a>
-          </div>
+        <div class="center-block" style="width: 50%">
+          <%= link_to "sign up", new_user_registration_path, class: "btn btn-success col-xs-10" %>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </body>

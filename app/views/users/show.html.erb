@@ -1,0 +1,71 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="user-info row">
+          <h2>User info</h2>
+          <% if current_user %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: " pull-left profile-img", fallback: "no_image.jpg" %>
+          <% if @user.id == current_user.id %>
+          <table class="table">
+            <tbody>
+              <tr></tr>
+              <tr>
+                <th>name</th>
+                <th>
+                  <p class="profile-name"><%= @user.name %></p>
+                </th>
+              </tr>
+              <tr>
+                <th>introduction</th>
+                <th>
+                  <p class="introduction"><%= @user.introduction %></p>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <%= link_to"",edit_user_path(@user.id), class: "glyphicon glyphicon-wrench btn btn-default col-xs-11" %>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+        <div class="new-book row">
+          <h2>New book</h2>
+          <%= form_for (@book) do |f| %>
+          <div><%= f.label :title, "Title"%></div>
+          <%= f.text_field :title, class: "col-xs-12"%>
+          <div><%= f.label :body, "Opinion"%></div>
+          <%= f.text_area :body, class: "col-xs-12" %>
+          <%= f.submit "Create Book", class: "btn btn-primary col-xs-12" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <h2>Books</h2>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th></th>
+              <th> Title </th>
+              <th> Opinion </th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <td>
+                <%= attachment_image_tag post_image.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></td>
+              <td><%= book.title %></td>
+              <td>
+                <%= link_to "", book.body,book_path(book.id)%>
+              </td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>

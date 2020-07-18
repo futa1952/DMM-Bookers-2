@@ -39,7 +39,6 @@ body {
 
 h2 {
   font-size: 30px;
-  margin-top: 70px;
 }
 h3 {
   color: #fff;
@@ -49,23 +48,21 @@ h3 {
 a:visited {
   color: #666;
 }
-.btn {
-  margin: 5px 0;
-}
 .btn-info {
-  background-color: #5bc0de;
-  border-color: #46b8da;
   margin:0;
-}
-.btn-info2 {
-  margin: 0;
 }
 .text-center {
   margin-right: 60px;
 }
-.top {
-  margin-top: 70px;
-}
 .pull-right {
   margin-right: 100px;
+}
+.field {
+  margin: 10px 0;
+}
+.glyphicon {
+  margin-right: 10px;
+}
+textarea {
+  margin: 5px 0;
 }
