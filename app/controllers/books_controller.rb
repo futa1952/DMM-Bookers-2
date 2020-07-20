@@ -41,7 +41,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-     flash[:notice] = "You have creatad book successfully."
+      flash[:notice] = "You have creatad book successfully."
       redirect_to  book_path(@book.id)
 
     else
@@ -58,19 +58,18 @@ class BooksController < ApplicationController
   end
 
 	private
-
     def book_params
         params.require(:book).permit(:title, :body)
     end
 
-     def user_params
-        params.require(:user).permit(:name,:profile_image,:introduction)
-   end
+    def user_params
+      params.require(:user).permit(:name,:profile_image,:introduction)
+    end
 
-     def  ensure_current_user
-      @book = Book.find(params[:id])
-     if @book.user_id != current_user.id
+    def  ensure_current_user
+    @book = Book.find(params[:id])
+    if @book.user_id != current_user.id
       redirect_to books_path
-     end
+    end
   end
 end
