@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
+  devise_for :users
   resources :books
   resources :users, only: [:show, :edit, :update]
   resources :post_images, only: [:new, :create, :index, :show]
