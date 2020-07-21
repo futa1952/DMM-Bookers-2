@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
   def new
     @book = Book.new
   end
@@ -33,14 +34,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if  @user.update(user_params)
-    flash[:notice] = "You have updated user successfully."
+    flash[:update] = "You have updated user successfully."
     redirect_to "/users/#{current_user.id}"
     else
       flash[:notice] = " errors prohibited this obj from being saved:"
       render :edit
-
     end
   end
+
   private
   def book_params
       params.require(:book).permit(:title, :body)

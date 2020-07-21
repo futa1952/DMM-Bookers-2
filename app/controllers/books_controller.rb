@@ -13,7 +13,6 @@ class BooksController < ApplicationController
       # redirect_to "/books/#{@book.id}"
     else
       @books = Book.all
-      flash[:notice] = ' errors prohibited this obj from being saved:'
       render "index"
     end
 	end
@@ -41,13 +40,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      flash[:notice] = "You have creatad book successfully."
+      flash[:update] = "You have updated book successfully."
       redirect_to  book_path(@book.id)
-
-    else
-      @books = Book.all
-      flash[:notice]= ' errors prohibited this obj from being saved:'
-      render "edit"
     end
   end
 

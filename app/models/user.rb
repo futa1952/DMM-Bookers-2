@@ -11,5 +11,4 @@ class User < ApplicationRecord
   validates :introduction,length: { maximum: 50}
 
   attachment :profile_image
- # deviseでemailを不必要にする
 end

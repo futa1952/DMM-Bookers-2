@@ -1,6 +1,16 @@
 <body>
   <div class="container">
     <h2>User info</h2>
+    <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <p class="error"><%= @user.errors.count %>errors prohibited this book from being saved:</p>
+        <% @user.errors.full_messages.each do |msg| %>
+        <p class="error"><%= msg %></p>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
     <div class="field">
       <%= form_for (@user) do |f| %>
       <%= f.label :user_name, "Name"%>
