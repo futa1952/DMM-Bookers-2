@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new(user_params)
     if @user.save
-      redirect_to  user_path(current_user.id)#成功の場合
+      flash[:notice] = "successfully"
+      redirect_to  user_path(current_user.id)
     else
       render "users/sign_up"#失敗の場合
     end
@@ -33,11 +34,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if  @user.update(user_params)
-    flash[:update] = "You have updated user successfully."
-    redirect_to "/users/#{current_user.id}"
+    if @user.update(user_params)
+      flash[:update] = "successfully."
+      redirect_to "/users/#{current_user.id}"
     else
-      flash[:notice] = " errors prohibited this obj from being saved:"
       render :edit
     end
   end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   def  ensure_current_user
     @user = User.find(params[:id])
     if @user.id != current_user.id
-    redirect_to user_path(current_user.id)
+      redirect_to user_path(current_user.id)
     end
   end
 end

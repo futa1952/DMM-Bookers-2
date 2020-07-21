@@ -1,12 +1,5 @@
 <body>
   <div class="container">
-    <% if flash[:notice] %>
-    <div class="alert alert-success"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:update] %>
-    <div class="alert alert-success"><%= flash[:update] %></div>
-    <% end %>
-
     <div class="row">
       <div class="col-xs-3">
         <div class="user-info row">
@@ -44,7 +37,7 @@
           <%= f.text_field :title, class: "col-xs-12"%>
           <div><%= f.label :body, "Opinion"%></div>
           <%= f.text_area :body, class: "col-xs-12" %>
-          <%= f.submit "Create Book", class: "btn btn-primary col-xs-12" %>
+          <%= f.submit "Create Book", class: "btn btn-primary btn-create col-xs-12" %>
           <% end %>
         </div>
       </div>
