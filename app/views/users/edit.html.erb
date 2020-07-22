@@ -11,8 +11,8 @@
       </ul>
     </div>
     <% end %>
+    <%= form_for (@user) do |f| %>
     <div class="field">
-      <%= form_for (@user) do |f| %>
       <%= f.label :user_name, "Name"%>
       <%= f.text_field :name %>
     </div>
@@ -29,7 +29,7 @@
       <%= f.label :user_introduction, "Introduction" %>
       <%= f.text_area :introduction %>
     </div>
-    <%= f.submit "Update User", class: "btn btn-update" %>
+    <%= f.submit "Update User", class: "btn btn-update btn-base-1" %>
     <% end %>
   </div>
 </body>

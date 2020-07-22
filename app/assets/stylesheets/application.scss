@@ -46,9 +46,6 @@ h3 {
   font-size: 20px;
   line-height: normal;
 }
-a:visited {
-  color: #666;
-}
 .btn-info {
   margin:0;
 }
@@ -87,4 +84,11 @@ a:visited {
 .update {
   color: green;
   margin-top: 10px;
+}
+#error_explanation h2 {
+  color: red;
+}
+
+#error_explanation li {
+  color: red;
 }

@@ -20,7 +20,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
           <li>
-            <%= link_to 'Home', user_path(current_user.id), class: 'glyphicon glyphicon-home'%>
+            <%= link_to 'Home', user_path(current_user), class: 'glyphicon glyphicon-home'%>
           </li>
           <li>
             <%= link_to 'Users', "/users", class: "glyphicon glyphicon-user" %>
@@ -29,20 +29,20 @@
             <%= link_to 'Books', "/books", class: "glyphicon glyphicon-book" %>
           </li>
           <li>
-            <%= link_to "logout",  destroy_user_session_path, class: " glyphicon  glyphicon-log-out", method: :delete %>
+            <%= link_to "logout",  destroy_user_session_path, class: " glyphicon glyphicon-log-out", method: :delete %>
           </li>
           <% else %>
           <li>
             <%= link_to "Home", root_path, class: 'glyphicon glyphicon-home icon' %>
           </li>
           <li>
-            <%= link_to "About", layouts_about_path,class:"glyphicon glyphicon-link"%>
+            <%= link_to "About", home_about_path ,class:"glyphicon glyphicon-link"%>
           </li>
           <li>
-            <%= link_to "sign up", new_user_registration_path, class:"glyphicon glyphicon-edit sign_up" %>
+            <%= link_to "sign up", new_user_registration_path, class:"glyphicon glyphicon-edit sign_up",match: :first %>
           </li>
           <li>
-            <%= link_to "login", new_user_session_path, class:"glyphicon glyphicon-log-in" %>
+            <%= link_to "login", new_user_session_path, class:"glyphicon glyphicon-log-in",match: :first　%>
           </li>
           <% end %>
         </ul>
