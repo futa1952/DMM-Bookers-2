@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
-  def new
-    @book = Book.new
-  end
+  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
 
-	def show
-		@book = Book.new
+  def show
+    @book = Book.new
     @user = User.find(params[:id])
     @books = @user.books
   end
@@ -15,9 +12,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "successfully"
-      redirect_to  user_path(current_user.id)
+      redirect_to user_path(current_user.id)
     else
-      render "users/sign_up"#失敗の場合
+      render "users/sign_up" # 失敗の場合
     end
   end
 
@@ -26,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users =User.all
+    @users = User.all
     @books = Book.all
     @book = Book.new
     @user = current_user
@@ -43,12 +40,13 @@ class UsersController < ApplicationController
   end
 
   private
+
   def book_params
-      params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body)
   end
 
   def user_params
-      params.require(:user).permit(:name,:profile_image,:introduction)
+    params.require(:user).permit(:name, :profile_image, :introduction)
   end
 
   def  ensure_current_user
