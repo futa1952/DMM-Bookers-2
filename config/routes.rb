@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :books
+  resources :books do
+    post 'add' => 'favorites#create'
+    delete '/add' => 'favorites#destroy'
+  end
   resources :users, only: [:show, :edit, :update]
   resources :post_images, only: [:new, :create, :index, :show]
   # devise_for :users
