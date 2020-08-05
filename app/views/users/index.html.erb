@@ -1,69 +1,34 @@
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-3">
-        <div class="user-info row">
-          <h2>User info</h2>
-          <% if current_user %>
-          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: " pull-left profile-img", fallback: "no_image.jpg" %>
-          <% if @user.id == current_user.id %>
-          <table class="table">
-            <tbody>
-              <tr></tr>
-              <tr>
-                <th>name</th>
-                <th>
-                  <p class="profile-name"><%= @user.name %></p>
-                </th>
-              </tr>
-              <tr>
-                <th>introduction</th>
-                <th>
-                  <p class="introduction"><%= @user.introduction %></p>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row">
-            <%= link_to"",edit_user_path(@user.id), class: "glyphicon glyphicon-wrench btn btn-default col-xs-11" %>
-          </div>
-          <% end %>
-        </div>
-        <% end %>
-        <div class="new-book row">
-          <h2>New book</h2>
-          <%= form_for (@book) do |f| %>
-          <div><%= f.label :title, "Title"%></div>
-          <%= f.text_field :title, class: "col-xs-12"%>
-          <div><%= f.label :body, "Opinion"%></div>
-          <%= f.text_area :body, class: "col-xs-12" %>
-          <%= f.submit "Create Book", class: "btn btn-primary btn-create col-xs-12" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-xs-9">
-        <h2>Users</h2>
-        <table class='table'>
-          <thead>
-            <tr>
-              <th>image</th>
-              <th>name</th>
-              <th></th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-            <tr>
-              <td><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg",size:'20x20',format: 'no_image.jpg', size: "40x40" %></td>
-              <th><%= user.name %>
-              <th>
-              <th><%= link_to "Show", user_path(user) %></th>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-xs-3">
+    <h2>User info</h2>
+    <%= render 'users/profile', user: @user %>
+
+    <h2>New book</h2>
+    <%= render 'books/newform', book: @book %>
   </div>
-</body>
+
+  <div class="col-xs-9">
+    <h2>Books</h2>
+    <!--books一覧 -->
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @books.each do |book| %>
+        <tr>
+          <td>
+            <%= link_to user_path(book.user) do %>
+            <%= attachment_image_tag(book.user, :profile_image,  size: "50x50", fallback: "no-image-mini.jpg") %>
+            <% end %>
+          </td>
+          <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
+          <td><%= book.body %></td>
+          <td><%= book.book_comments.count %></td>
+        </tr>

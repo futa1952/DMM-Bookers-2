@@ -1,57 +1,38 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
+  before_action :authenticate_user!, only: [:show, :index, :update, :edit]
+  before_action :correct_user, only: [:update, :edit]
 
   def show
-    @book = Book.new
     @user = User.find(params[:id])
     @books = @user.books
+    @book = Book.new
   end
 
-  def new
-    @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "successfully"
-      redirect_to user_path(current_user.id)
-    else
-      render "users/sign_up" # 失敗の場合
-    end
+  def index
+    @users = User.all
+    @book = Book.new
   end
 
   def edit
     @user = User.find(params[:id])
   end
 
-  def index
-    @users = User.all
-    @books = Book.all
-    @book = Book.new
-    @user = current_user
-  end
-
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:update] = "You have updated user successfully"
-      redirect_to user_path(current_user)
+      redirect_to user_path(@user), notice: "You have updated user successfully."
     else
-      render :edit
+      render "users/edit"
     end
   end
 
   private
-
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end
-
   def user_params
-    params.require(:user).permit(:name, :profile_image, :introduction)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
-  def  ensure_current_user
+  def correct_user
     @user = User.find(params[:id])
-    if @user.id != current_user.id
+    unless @user == current_user
       redirect_to user_path(current_user.id)
     end
   end
