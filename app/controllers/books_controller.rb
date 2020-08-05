@@ -1,51 +1,49 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!
-  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
-  # (ログインユーザー以外の人が情報を遷移しようとした時に制限をかける)
-
-  def create
-    @user = current_user
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-    if @book.save
-      flash[:notice] = "successfully."
-      redirect_to book_path(@book.id)
-    else
-      @books = Book.all
-      render "index"
-    end
-  end
+  before_action :authenticate_user!, only: [:index, :create, :edit, :show, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
 
   def show
-    @user = current_user
     @book = Book.find(params[:id])
-    @book_new = Book.new
+    @newbook = Book.new
+    @user = User.find(@book.user_id)
+    @comment = BookComment.new
   end
 
   def index
-    @user = current_user
     @books = Book.all
     @book = Book.new
+  end
+
+  def create
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+      redirect_to book_path(@book.id), notice: "You have created book successfully."
+    else
+      @books = Book.all
+      render 'index'
+    end
   end
 
   def edit
     @book = Book.find(params[:id])
   end
 
+
+
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
-      flash[:notice] = "You have updated book successfully."
-      redirect_to book_path(@book.id)
+      if @book.update(book_params)
+      redirect_to book_path(@book), notice: "You have updated book successfully."
     else
-      render :edit
+      render "edit"
     end
   end
 
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to "/books"
+    redirect_to books_path
   end
 
   private
@@ -54,13 +52,9 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
-  def user_params
-    params.require(:user).permit(:name, :profile_image, :introduction)
-  end
+  def correct_user
+		book = Book.find(params[:id])
+		redirect_to books_path if current_user.id != book.user_id
+	end
 
-  def ensure_current_user
-    @book = Book.find(params[:id])
-    if @book.user_id != current_user.id
-      redirect_to books_path
-  end
 end

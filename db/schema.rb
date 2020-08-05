@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_08_05_061526) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "name"
     t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
